@@ -1,3 +1,8 @@
+export interface PostMutation {
+    title: string,
+    description: string,
+    image: File | null
+}
 export interface IUser {
     _id: string,
     username: string,

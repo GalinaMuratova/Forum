@@ -21,6 +21,8 @@ const run = async () => {
         password:'456',
         token:crypto.randomUUID()
     });
+
+
     await db.close();
 };
 
