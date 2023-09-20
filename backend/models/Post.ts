@@ -5,11 +5,13 @@ const PostSchema = new Schema({
     author: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
-        required: false,
         validate: {
             validator: async (value: mongoose.Types.ObjectId) => await User.findById(value),
             message: 'Author doesnt exist',
         }
+    },
+    date: {
+        type: Date,
     },
     title: {
         type: String,

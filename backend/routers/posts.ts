@@ -6,14 +6,38 @@ import {imagesUpload} from "../multer";
 
 const postsRouter = express.Router();
 
+postsRouter.get('/', async (req,res) => {
+   try {
+       const posts = await Post.find().populate('author', 'username').sort({ date: -1 });
+       return res.send(posts);
+   } catch {
+       return res.sendStatus(500);
+   }
+});
+
+postsRouter.get('/:id', async (req,res) => {
+    try {
+        const post = await Post.findById(req.params.id).populate('author', 'username');
+        if (!post) {
+            return res.sendStatus(404);
+        }
+        return res.send(post);
+    } catch {
+        return res.sendStatus(500);
+    }
+});
+
 postsRouter.post('/', auth, imagesUpload.single('image'), async(req, res, next) => {
    try {
-       const userNew = (req as RequestWithUser).user;
+       const user = (req as RequestWithUser).user;
+       const currentDate = new Date();
+
        const posts = new Post ({
-           user: userNew._id,
+           author: user._id,
            title: req.body.title,
            description: req.body.description,
            image: req.file? req.file.filename:null,
+           date: currentDate
        });
        await posts.save();
        return res.send(posts);

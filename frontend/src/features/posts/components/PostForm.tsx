@@ -1,34 +1,33 @@
 import React, {useState} from 'react';
 import {PostMutation} from "../../../types";
-import {Button, Grid, TextField} from "@mui/material";
-// import SendIcon from '@mui/icons-material/Send';
-// import LoadingButton from '@mui/lab/LoadingButton';
+import { Grid, TextField} from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+import LoadingButton from '@mui/lab/LoadingButton';
 import FileInput from "../../../components/UI/FileInput/FileInput";
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {useNavigate} from "react-router-dom";
+import {createPosts} from "../postsThunk";
+import {selectCreateLoading} from "../postsSlice";
 
 const PostForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    // const loading = useAppSelector(selectCreateLoading);
+    const loading = useAppSelector(selectCreateLoading);
     const [state, setState] = useState<PostMutation>({
         title: '',
         description: '',
         image: null
     });
 
-    // useEffect(() => {
-    //     dispatch(fetchCategories())
-    // }, [dispatch]);
-
     const submitFormHandler = async (e: React.FormEvent) => {
         e.preventDefault();
-        // try {
-        //     await dispatch(createProduct(state)).unwrap();
-        //     navigate('/');
-        // } catch (e) {
-        //     alert('Invalid field');
-        // }
+        try {
+            console.log(state)
+            await dispatch(createPosts(state)).unwrap();
+            navigate('/');
+        } catch (e) {
+            alert('Invalid field');
+        }
     };
 
     const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -83,17 +82,16 @@ const PostForm = () => {
                             label='image' />
                     </Grid>
                     <Grid item xs>
-                        <Button variant='contained'>Send</Button>
-                        {/*<LoadingButton*/}
-                        {/*    type="submit"*/}
-                        {/*    size="small"*/}
-                        {/*    endIcon={<SendIcon />}*/}
-                        {/*    loading={loading}*/}
-                        {/*    loadingPosition="end"*/}
-                        {/*    variant="contained"*/}
-                        {/*>*/}
-                        {/*    <span>Send</span>*/}
-                        {/*</LoadingButton>*/}
+                        <LoadingButton
+                            type="submit"
+                            size="small"
+                            endIcon={<SendIcon />}
+                            loading={loading}
+                            loadingPosition="end"
+                            variant="contained"
+                        >
+                            <span>Send</span>
+                        </LoadingButton>
                     </Grid>
                 </Grid>
             </form>

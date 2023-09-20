@@ -6,6 +6,7 @@ import Register from "./features/users/Register";
 import Login from "./features/users/Login";
 import Posts from "./features/posts/Posts";
 import NewPosts from "./features/posts/NewPosts";
+import OnePost from "./features/posts/OnePost";
 
 const App = () => {
   return (
@@ -19,7 +20,8 @@ const App = () => {
             <Route path='/register' element={(<Register />)} />
             <Route path="/login" element={<Login />} />
             <Route path='/' element={(<Posts />)} />
-            <Route path='post/new' element={(<NewPosts />)} />
+            <Route path='/post/new' element={(<NewPosts />)} />
+            <Route path='/posts/:id' element={(<OnePost />)} />
         </Routes>
       </main>
     </>
