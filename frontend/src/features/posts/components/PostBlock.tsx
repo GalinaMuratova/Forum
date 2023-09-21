@@ -1,8 +1,16 @@
 import React from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Grid, styled, Typography } from '@mui/material';
+import {
+    Card,
+    CardActionArea,
+    CardContent,
+    Grid,
+    styled,
+    Typography
+} from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link as NavLink } from 'react-router-dom';
 import dayjs from 'dayjs';
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 
 const Link = styled(NavLink)({
     color: 'inherit',
@@ -25,33 +33,34 @@ const PostBlock: React.FC<Props> = ({ id, title, image, author, date }) => {
     let block = <></>;
     if (image) {
         productImage = 'http://localhost:8000' + '/images/' + image;
-        block = <CardMedia
-            sx={{height:140}}
-            image={productImage}
-            title={title}
-        />;
+        block = <img style={{height:'150px', width:'auto'}} alt={title} src={productImage} />
     } else if (image === null) {
-        block = <></>
+        block = <MessageRoundedIcon sx={{height:140, fontSize:100}} color="primary"/>;
     }
 
     return (
         <Grid item xs={12} sm={6} md={4} lg={3} component={Link} to={'/posts/' + id}>
-            <Card>
+            <Card style={{margin:'20px 0'}}>
                 <CardActionArea>
-                    <CardContent>
-                        {block}
-                        <Typography gutterBottom variant="h5" component="div">
-                            { author }
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="div">
-                            { title }
-                        </Typography>
-                        <Grid container justifyContent="space-between" alignItems="center">
-                            <Typography variant="h6" color="text.secondary">
-                                {dayjs(date).format('DD.MM.YYYY HH:mm:ss')}
+                    <CardContent style={{display: 'flex'}}>
+                        <div style={{ height:'150px', width:'150px'}}>
+                            {block}
+                        </div>
+                        <div>
+                            <div style={{display:'flex',  margin:'0 0 0 220px'}}>
+                                <Typography style={{marginRight:'10px'}} variant="h6" color="text.secondary">
+                                    {dayjs(date).format('DD.MM.YYYY HH:mm:ss')}
+                                </Typography>
+                                <Typography gutterBottom variant="h6" component="div">
+                                    by { author }
+                                </Typography>
+
+                            </div>
+                            <Typography style={{margin:'0 0 0 250px'}} gutterBottom variant="h4" component="div">
+                                { title }
                             </Typography>
-                            <ArrowForwardIosIcon/>
-                        </Grid>
+                        </div>
+                        <ArrowForwardIosIcon style={{margin:'30px 20px 0 auto'}}/>
                     </CardContent>
                 </CardActionArea>
             </Card>

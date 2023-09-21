@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {CircularProgress, Grid, Typography} from "@mui/material";
+import {CircularProgress, Container, Grid} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {selectPosts, selectPostsLoading} from "./postsSlice";
 import {fetchPosts} from "./postsThunk";
@@ -15,26 +15,21 @@ const Posts = () => {
 
     return (
         <>
-            <Grid container direction="column" spacing={2}>
-                <Grid item container justifyContent="space-between" alignItems="center">
-                    <Grid item>
-                        <Typography variant="h4">
-                            Posts
-                        </Typography>
-                    </Grid>
+            <Container>
+                <Grid container direction="column" spacing={2}>
+                    {loading ? (
+                        <Grid item container justifyContent="center">
+                            <CircularProgress />
+                        </Grid>
+                    ) : (
+                        <Grid style={{margin:'15px 0'}}>
+                            {posts.map((el) => (
+                                <PostBlock key={el._id} id={el._id} title={el.title} author={el.author.username} date={el.date} image={el.image} />
+                            ))}
+                        </Grid>
+                    )}
                 </Grid>
-                {loading ? (
-                    <Grid item container justifyContent="center">
-                        <CircularProgress />
-                    </Grid>
-                ) : (
-                    <Grid container item spacing={2}>
-                        {posts.map((el) => (
-                            <PostBlock key={el._id} id={el._id} title={el.title} author={el.author.username} date={el.date} image={el.image} />
-                        ))}
-                    </Grid>
-                )}
-            </Grid>
+            </Container>
         </>
     );
 };
