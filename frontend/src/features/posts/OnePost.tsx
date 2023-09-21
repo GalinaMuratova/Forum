@@ -40,11 +40,11 @@ const OnePost = () => {
                                     </Typography>
                                 </div>
                                 <div style={{margin:'0 0 20px 20px'}}>
-                                    <Typography gutterBottom variant="h4" component="div">
+                                    <Typography gutterBottom variant="h5" component="div">
                                         { post?.title }
                                     </Typography>
                                     <Grid container justifyContent="space-between" alignItems="center">
-                                        <Typography variant="h5" color="text.secondary">
+                                        <Typography variant="h6" color="text.secondary">
                                             { post?.description }
                                         </Typography>
                                     </Grid>

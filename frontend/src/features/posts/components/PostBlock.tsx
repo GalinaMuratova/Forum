@@ -33,7 +33,7 @@ const PostBlock: React.FC<Props> = ({ id, title, image, author, date }) => {
     let block = <></>;
     if (image) {
         productImage = 'http://localhost:8000' + '/images/' + image;
-        block = <img style={{height:'150px', width:'auto'}} alt={title} src={productImage} />
+        block = <img style={{height:'150px', maxWidth:'200px', objectFit: 'cover'}} alt={title} src={productImage} />
     } else if (image === null) {
         block = <MessageRoundedIcon sx={{height:140, fontSize:100}} color="primary"/>;
     }
@@ -43,11 +43,11 @@ const PostBlock: React.FC<Props> = ({ id, title, image, author, date }) => {
             <Card style={{margin:'20px 0'}}>
                 <CardActionArea>
                     <CardContent style={{display: 'flex'}}>
-                        <div style={{ height:'150px', width:'150px'}}>
+                        <div style={{ height:'150px', maxWidth:'200px' }}>
                             {block}
                         </div>
                         <div>
-                            <div style={{display:'flex',  margin:'0 0 0 220px'}}>
+                            <div style={{display:'flex',  margin:'0 0 0 100px'}}>
                                 <Typography style={{marginRight:'10px'}} variant="h6" color="text.secondary">
                                     {dayjs(date).format('DD.MM.YYYY HH:mm:ss')}
                                 </Typography>
@@ -56,7 +56,7 @@ const PostBlock: React.FC<Props> = ({ id, title, image, author, date }) => {
                                 </Typography>
 
                             </div>
-                            <Typography style={{margin:'0 0 0 250px'}} gutterBottom variant="h4" component="div">
+                            <Typography style={{margin:'0 0 0 120px', fontWeight:'bold'}} gutterBottom variant="h5" component="div">
                                 { title }
                             </Typography>
                         </div>

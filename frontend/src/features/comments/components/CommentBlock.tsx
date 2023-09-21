@@ -16,7 +16,7 @@ const CommentBlock: React.FC<Props> = ({text, author}) => {
                             <Typography gutterBottom variant="h6" component="div" style={{color:'gray'}}>
                                 { author } said :
                             </Typography>
-                            <Typography variant="h5" component="div">
+                            <Typography variant="h6" component="div">
                                 {text}
                             </Typography>
                         </CardContent>
