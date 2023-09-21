@@ -5,14 +5,16 @@ import {fetchOnePost} from "./postsThunk";
 import {selectOnePost, selectOnePostLoading} from "./postsSlice";
 import dayjs from "dayjs";
 import {Card, CardActionArea, CardContent, CircularProgress, Container, Grid, Typography} from "@mui/material";
+import {selectUser} from "../users/usersSlice";
+import Comments from "../comments/Comments";
+import CommentsForm from "../comments/components/CommentsForm";
 
 const OnePost = () => {
-
-
     const dispatch = useAppDispatch();
     const { id } = useParams();
     const post = useAppSelector(selectOnePost);
     const loading = useAppSelector(selectOnePostLoading);
+    const user = useAppSelector(selectUser);
 
     useEffect(() => {
         if (id) {
@@ -50,6 +52,14 @@ const OnePost = () => {
                             </CardContent>
                         </CardActionArea>
                     </Card>
+                    {user ? (
+                        <>
+                            <CommentsForm/>
+                            <Comments />
+                        </>
+                    ) : (
+                        <Comments/>
+                    )}
                 </Container>
             )}
 

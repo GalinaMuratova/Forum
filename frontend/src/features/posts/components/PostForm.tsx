@@ -22,7 +22,6 @@ const PostForm = () => {
     const submitFormHandler = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            console.log(state)
             await dispatch(createPosts(state)).unwrap();
             navigate('/');
         } catch (e) {

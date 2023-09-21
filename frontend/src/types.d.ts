@@ -15,6 +15,21 @@ export interface IPost {
     image: string | null,
     date: Date
 }
+
+export interface IComment {
+    _id: string,
+    author: {
+        _id: string,
+        username: string
+    },
+    post: string,
+    text: string,
+}
+
+export interface CommentMutation {
+    post: string,
+    text: string
+}
 export interface PostMutation{
     title: string,
     description: string,
